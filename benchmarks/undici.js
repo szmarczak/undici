@@ -5,7 +5,7 @@ const { PassThrough } = require('stream')
 const undici = require('..')
 const total = 100000
 
-const agent = undici('http://localhost:3000', {
+const agent = undici('http://localhost:8081', {
   connections: 100,
   pipelining: 10
 })

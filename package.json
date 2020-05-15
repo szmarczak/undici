@@ -25,6 +25,7 @@
     "tap": "^14.0.0"
   },
   "dependencies": {
+    "benchmark": "^2.1.4",
     "http-parser-js": "^0.5.2"
   }
 }
