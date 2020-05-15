@@ -253,7 +253,7 @@ Options:
 
 Calls [`client.request(req, callback)`][request] on one of the clients.
 
-#### `pool.request(req, factory, callback)`
+#### `pool.stream(req, factory, callback)`
 
 Calls [`client.stream(req, factory, callback)`][stream] on one of the clients.
 
