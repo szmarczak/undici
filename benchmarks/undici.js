@@ -1,7 +1,9 @@
 'use strict'
 
+const { PassThrough } = require('stream')
+
 const undici = require('..')
-const total = 10000
+const total = 100000
 
 const agent = undici('http://localhost:3000', {
   connections: 100,
@@ -12,21 +14,20 @@ let responses = 0
 
 console.time('requests')
 for (let i = 0; i < total; i++) {
-  agent.request({
+  agent.stream({
     method: 'GET',
     path: '/'
-  }, (err, { body }) => {
+  }, () => {
+    return new PassThrough().once('finish', () => {
+      if (++responses === total) {
+        console.timeEnd('requests')
+      }
+    })
+  }, (err) => {
     // let's crash this, the benchmark harness is not
     // ready to capture failures
     if (err) {
       throw err
-    }
-
-    body.resume()
-
-    if (++responses === total) {
-      console.timeEnd('requests')
-      agent.close()
     }
   })
 }

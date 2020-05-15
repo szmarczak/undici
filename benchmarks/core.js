@@ -1,7 +1,9 @@
 'use strict'
 
 const { Agent, request } = require('http')
-const total = 10000
+const { PassThrough } = require('stream')
+
+const total = 100000
 
 const agent = new Agent({
   keepAlive: true,
@@ -20,10 +22,10 @@ for (let i = 0; i < total; i++) {
     path: '/',
     agent
   }).on('response', (res) => {
-    res.resume()
-
-    if (++responses === total) {
-      console.timeEnd('requests')
-    }
+    res.pipe(new PassThrough()).once('finish', () => {
+      if (++responses === total) {
+        console.timeEnd('requests')
+      }
+    })
   }).end()
 }

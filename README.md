@@ -8,6 +8,12 @@ An HTTP/1.1 client, written from scratch for Node.js.
 > Undici means eleven in Italian. 1.1 -> 11 -> Eleven -> Undici.
 It is also a Stranger Things reference.
 
+## Benchmarks
+
+undici stream (keepalive + pipeling): 33.3k req/s
+undici request (keepalive + pipeling): 29.4k req/s
+core (keepalive): 7.7k req/s
+
 <!--
 Picture of Eleven
 -->
